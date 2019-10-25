@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://signmykey.io/backends/authenticator/</loc>
+  </url>
+  
+  <url>
+    <loc>https://signmykey.io/backends/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://signmykey.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://signmykey.io/getting-started/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://signmykey.io/howtos/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://signmykey.io/howtos/ldapserver/</loc>
+  </url>
+  
+  <url>
+    <loc>https://signmykey.io/howtos/oidcropc/</loc>
+  </url>
+  
+  <url>
+    <loc>https://signmykey.io/backends/principals/</loc>
+  </url>
+  
+  <url>
+    <loc>https://signmykey.io/getting-started/sshserver/</loc>
+  </url>
+  
+  <url>
+    <loc>https://signmykey.io/backends/signer/</loc>
+  </url>
+  
+  <url>
+    <loc>https://signmykey.io/</loc>
+  </url>
+  
+  <url>
+    <loc>https://signmykey.io/getting-started/signmykey/</loc>
+  </url>
+  
+  <url>
+    <loc>https://signmykey.io/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://signmykey.io/getting-started/vault/</loc>
+  </url>
+  
+  <url>
+    <loc>https://signmykey.io/howtos/vaultpki/</loc>
+  </url>
+  
+</urlset>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+  
+  
+  
+  
+   <html class="no-js"> 
+
+  <head lang="en-us">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <title>LDAP Server - Signmykey</title>
+    <meta name="generator" content="Hugo 0.46" />
+
+    
+    <meta name="description" content="Signmykey is an automated SSH Certificate Authority">
+    
+    <link rel="canonical" href="https://signmykey.io/howtos/ldapserver/">
+    
+    <meta name="author" content="Pablo RUTH">
+    
+
+    <meta property="og:url" content="https://signmykey.io/howtos/ldapserver/">
+    <meta property="og:title" content="Signmykey">
+    <meta property="og:image" content="https://signmykey.io/images/square-logo.png">
+    <meta name="apple-mobile-web-app-title" content="Signmykey">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://signmykey.io/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="https://signmykey.io/images/favicon.ico">
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('https://signmykey.io/fonts/icon.eot');
+        src: url('https://signmykey.io/fonts/icon.eot')
+               format('embedded-opentype'),
+             url('https://signmykey.io/fonts/icon.woff')
+               format('woff'),
+             url('https://signmykey.io/fonts/icon.ttf')
+               format('truetype'),
+             url('https://signmykey.io/fonts/icon.svg')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://signmykey.io/stylesheets/application.css">
+    <link rel="stylesheet" href="https://signmykey.io/stylesheets/temporary.css">
+    <link rel="stylesheet" href="https://signmykey.io/stylesheets/palettes.css">
+    <link rel="stylesheet" href="https://signmykey.io/stylesheets/highlight/highlight.css">
+
+    
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu&#43;Mono">
+    <style>
+      body, input {
+        font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+      }
+      pre, code {
+        font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+      }
+    </style>
+
+    
+    <script src="https://signmykey.io/javascripts/modernizr.js"></script>
+
+    
+
+  </head>
+  <body class="palette-primary-grey palette-accent-green">
+
+
+
+	
+	
+
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	<nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        LDAP Server
+      </div>
+    </div>
+
+    
+
+    
+    
+        
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+</header>
+
+<main class="main">
+	<div class="drawer">
+		<nav aria-label="Navigation">
+  <a href="https://github.com/signmykeyio/signmykey" class="project">
+    <div class="banner">
+      
+        <div class="logo">
+          <img src="https://signmykey.io/images/square-logo.png">
+        </div>
+      
+      <div class="name">
+        <strong>Signmykey </strong>
+        
+          <br>
+          signmykeyio/signmykey
+        
+      </div>
+    </div>
+  </a>
+
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/signmykeyio/signmykey/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/signmykeyio/signmykey/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
+
+      <div class="toc">
+        
+        <ul>
+          
+
+
+
+
+<li>
+  
+    
+
+
+
+<a  title="Home" href="https://signmykey.io/">
+	
+	Home
+</a>
+
+
+
+  
+</li>
+
+
+
+<li>
+  
+    <span class="section">Getting Started</span>
+    <ul>
+      
+        
+        
+
+
+
+<a  title="Vault" href="https://signmykey.io/getting-started/vault/">
+	
+	Vault
+</a>
+
+
+
+      
+        
+        
+
+
+
+<a  title="Signmykey" href="https://signmykey.io/getting-started/signmykey/">
+	
+	Signmykey
+</a>
+
+
+
+      
+        
+        
+
+
+
+<a  title="SSH Server" href="https://signmykey.io/getting-started/sshserver/">
+	
+	SSH Server
+</a>
+
+
+
+      
+    </ul>
+  
+</li>
+
+
+
+<li>
+  
+    <span class="section">Backends</span>
+    <ul>
+      
+        
+        
+
+
+
+<a  title="Authenticator" href="https://signmykey.io/backends/authenticator/">
+	
+	Authenticator
+</a>
+
+
+
+      
+        
+        
+
+
+
+<a  title="Principals" href="https://signmykey.io/backends/principals/">
+	
+	Principals
+</a>
+
+
+
+      
+        
+        
+
+
+
+<a  title="Signer" href="https://signmykey.io/backends/signer/">
+	
+	Signer
+</a>
+
+
+
+      
+    </ul>
+  
+</li>
+
+
+
+<li>
+  
+    <span class="section">Howtos</span>
+    <ul>
+      
+        
+        
+
+
+
+<a  title="Vault PKI" href="https://signmykey.io/howtos/vaultpki/">
+	
+	Vault PKI
+</a>
+
+
+
+      
+        
+        
+
+
+
+<a class="current" title="LDAP server" href="https://signmykey.io/howtos/ldapserver/">
+	
+	LDAP server
+</a>
+
+
+<ul id="scrollspy">
+</ul>
+
+
+      
+        
+        
+
+
+
+<a  title="OpenID Connect ROPC" href="https://signmykey.io/howtos/oidcropc/">
+	
+	OpenID Connect ROPC
+</a>
+
+
+
+      
+    </ul>
+  
+</li>
+
+
+        </ul>
+        
+
+        
+        <hr>
+        <span class="section">The author</span>
+        
+        <ul>
+          
+
+          
+
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+			<h1>LDAP Server </h1>
+
+			
+
+<p>This HOWTO describe how to configure an LDAP server using <a href="https://github.com/glauth/glauth">glauth</a>.</p>
+
+<h2 id="installation">Installation</h2>
+
+<h3 id="download">Download</h3>
+
+<pre><code class="language-sh">wget https://github.com/glauth/glauth/releases/download/v1.1.0/glauth64 -O /usr/local/bin/glauth
+chmod +x /usr/local/bin/glauth
+</code></pre>
+
+<h3 id="user-and-directories">User and directories</h3>
+
+<pre><code class="language-sh">useradd --no-create-home -s /bin/false glauth
+mkdir -m 700 /etc/glauth
+wget https://raw.githubusercontent.com/glauth/glauth/master/sample-simple.cfg -O /etc/glauth/glauth.cfg
+chown -R glauth: /etc/glauth/
+</code></pre>
+
+<h3 id="configuration">Configuration</h3>
+
+<p>The default configuration downloaded during the previous step contains some users.</p>
+
+<h3 id="launch">Launch</h3>
+
+<pre><code class="language-sh">runuser -s /bin/bash -l glauth -c 'glauth -c /etc/glauth/glauth.cfg'
+</code></pre>
+
+<h2 id="usage">Usage</h2>
+
+<p>List LDAP entries</p>
+
+<pre><code class="language-sh">ldapsearch -LLL -H ldap://localhost:3893 -D cn=serviceuser,ou=svcaccts,dc=glauth,dc=com -w mysecret -x -bdc=glauth,dc=com
+</code></pre>
+
+
+			<aside class="copyright" role="note">
+				
+				&copy; 2019 Released under the MIT license &ndash;
+				
+				Documentation built with
+				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
+				using the
+				<a href="http://github.com/digitalcraftsman/hugo-material-docs" target="_blank">Material</a> theme.
+			</aside>
+
+			<footer class="footer">
+				
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  
+      <a href="https://signmykey.io/backends/authenticator/" title="Authenticator">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              Authenticator
+            </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+
+  <div class="next">
+  
+      <a href="https://signmykey.io/howtos/oidcropc/" title="OpenID Connect ROPC compliant server">
+        <span class="direction">
+          Next
+        </span>
+        <div class="page">
+          <div class="stretch">
+            <div class="title">
+              OpenID Connect ROPC compliant server
+            </div>
+          </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+</nav>
+
+
+
+
+
+			</footer>
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+    <script>
+    
+      var base_url = 'https:\/\/signmykey.io\/';
+      var repo_id  = 'signmykeyio\/signmykey';
+    
+    </script>
+
+    <script src="https://signmykey.io/javascripts/application.js"></script>
+    
+
+    <script>
+      /* Add headers to scrollspy */
+      var headers   = document.getElementsByTagName("h2");
+      var scrollspy = document.getElementById('scrollspy');
+
+      if(scrollspy) {
+        if(headers.length > 0) {
+          for(var i = 0; i < headers.length; i++) {
+            var li = document.createElement("li");
+            li.setAttribute("class", "anchor");
+
+            var a  = document.createElement("a");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", headers[i].innerHTML);
+            a.innerHTML = headers[i].innerHTML;
+
+            li.appendChild(a)
+            scrollspy.appendChild(li);
+          }
+        } else {
+          scrollspy.parentElement.removeChild(scrollspy)
+        }
+
+
+        /* Add permanent link next to the headers */
+        var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+        for(var i = 0; i < headers.length; i++) {
+            var a = document.createElement("a");
+            a.setAttribute("class", "headerlink");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", "Permanent link")
+            a.innerHTML = "#";
+            headers[i].appendChild(a);
+        }
+      }
+    </script>
+
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+

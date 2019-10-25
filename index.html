@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+  
+  
+  
+  
+   <html class="no-js"> 
+
+  <head lang="en-us">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <title>Signmykey</title>
+    <meta name="generator" content="Hugo 0.46" />
+
+    
+    <meta name="description" content="Signmykey is an automated SSH Certificate Authority">
+    
+    <link rel="canonical" href="https://signmykey.io/">
+    
+    <meta name="author" content="Pablo RUTH">
+    
+
+    <meta property="og:url" content="https://signmykey.io/">
+    <meta property="og:title" content="Signmykey">
+    <meta property="og:image" content="https://signmykey.io/images/square-logo.png">
+    <meta name="apple-mobile-web-app-title" content="Signmykey">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://signmykey.io/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="https://signmykey.io/images/favicon.ico">
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('https://signmykey.io/fonts/icon.eot');
+        src: url('https://signmykey.io/fonts/icon.eot')
+               format('embedded-opentype'),
+             url('https://signmykey.io/fonts/icon.woff')
+               format('woff'),
+             url('https://signmykey.io/fonts/icon.ttf')
+               format('truetype'),
+             url('https://signmykey.io/fonts/icon.svg')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://signmykey.io/stylesheets/application.css">
+    <link rel="stylesheet" href="https://signmykey.io/stylesheets/temporary.css">
+    <link rel="stylesheet" href="https://signmykey.io/stylesheets/palettes.css">
+    <link rel="stylesheet" href="https://signmykey.io/stylesheets/highlight/highlight.css">
+
+    
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu&#43;Mono">
+    <style>
+      body, input {
+        font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+      }
+      pre, code {
+        font-family: 'Ubuntu Mono', 'Courier New', 'Courier', monospace;
+      }
+    </style>
+
+    
+    <script src="https://signmykey.io/javascripts/modernizr.js"></script>
+
+    
+    <link href="https://signmykey.io/index.xml" rel="alternate" type="application/rss+xml" title="Signmykey" />
+    <link href="https://signmykey.io/index.xml" rel="feed" type="application/rss+xml" title="Signmykey" />
+    
+
+  </head>
+  <body class="palette-primary-grey palette-accent-green">
+
+
+
+	
+	
+
+
+<div class="backdrop">
+	<div class="backdrop-paper"></div>
+</div>
+
+<input class="toggle" type="checkbox" id="toggle-drawer">
+<input class="toggle" type="checkbox" id="toggle-search">
+<label class="toggle-button overlay" for="toggle-drawer"></label>
+
+<header class="header">
+	<nav aria-label="Header">
+  <div class="bar default">
+    <div class="button button-menu" role="button" aria-label="Menu">
+      <label class="toggle-button icon icon-menu" for="toggle-drawer">
+        <span></span>
+      </label>
+    </div>
+    <div class="stretch">
+      <div class="title">
+        Signmykey
+      </div>
+    </div>
+
+    
+
+    
+    
+        
+  </div>
+  <div class="bar search">
+    <div class="button button-close" role="button" aria-label="Close">
+      <label class="toggle-button icon icon-back" for="toggle-search"></label>
+    </div>
+    <div class="stretch">
+      <div class="field">
+        <input class="query" type="text" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck>
+      </div>
+    </div>
+    <div class="button button-reset" role="button" aria-label="Search">
+      <button class="toggle-button icon icon-close" id="reset-search"></button>
+    </div>
+  </div>
+</nav>
+</header>
+
+<main class="main">
+	<div class="drawer">
+		<nav aria-label="Navigation">
+  <a href="https://github.com/signmykeyio/signmykey" class="project">
+    <div class="banner">
+      
+        <div class="logo">
+          <img src="https://signmykey.io/images/square-logo.png">
+        </div>
+      
+      <div class="name">
+        <strong>Signmykey </strong>
+        
+          <br>
+          signmykeyio/signmykey
+        
+      </div>
+    </div>
+  </a>
+
+  <div class="scrollable">
+    <div class="wrapper">
+      
+        <ul class="repo">
+          <li class="repo-download">
+            <a href="https://github.com/signmykeyio/signmykey/archive/master.zip" target="_blank" title="Download" data-action="download">
+              <i class="icon icon-download"></i> Download
+            </a>
+          </li>
+          <li class="repo-stars">
+            <a href="https://github.com/signmykeyio/signmykey/stargazers" target="_blank" title="Stargazers" data-action="star">
+              <i class="icon icon-star"></i> Stars
+              <span class="count">&ndash;</span>
+            </a>
+          </li>
+        </ul>
+        <hr>
+      
+
+      <div class="toc">
+        
+        <ul>
+          
+
+
+
+
+<li>
+  
+    
+
+
+
+<a class="current" title="Home" href="https://signmykey.io/">
+	
+	Home
+</a>
+
+
+<ul id="scrollspy">
+</ul>
+
+
+  
+</li>
+
+
+
+<li>
+  
+    <span class="section">Getting Started</span>
+    <ul>
+      
+        
+        
+
+
+
+<a  title="Vault" href="https://signmykey.io/getting-started/vault/">
+	
+	Vault
+</a>
+
+
+
+      
+        
+        
+
+
+
+<a  title="Signmykey" href="https://signmykey.io/getting-started/signmykey/">
+	
+	Signmykey
+</a>
+
+
+
+      
+        
+        
+
+
+
+<a  title="SSH Server" href="https://signmykey.io/getting-started/sshserver/">
+	
+	SSH Server
+</a>
+
+
+
+      
+    </ul>
+  
+</li>
+
+
+
+<li>
+  
+    <span class="section">Backends</span>
+    <ul>
+      
+        
+        
+
+
+
+<a  title="Authenticator" href="https://signmykey.io/backends/authenticator/">
+	
+	Authenticator
+</a>
+
+
+
+      
+        
+        
+
+
+
+<a  title="Principals" href="https://signmykey.io/backends/principals/">
+	
+	Principals
+</a>
+
+
+
+      
+        
+        
+
+
+
+<a  title="Signer" href="https://signmykey.io/backends/signer/">
+	
+	Signer
+</a>
+
+
+
+      
+    </ul>
+  
+</li>
+
+
+
+<li>
+  
+    <span class="section">Howtos</span>
+    <ul>
+      
+        
+        
+
+
+
+<a  title="Vault PKI" href="https://signmykey.io/howtos/vaultpki/">
+	
+	Vault PKI
+</a>
+
+
+
+      
+        
+        
+
+
+
+<a  title="LDAP server" href="https://signmykey.io/howtos/ldapserver/">
+	
+	LDAP server
+</a>
+
+
+
+      
+        
+        
+
+
+
+<a  title="OpenID Connect ROPC" href="https://signmykey.io/howtos/oidcropc/">
+	
+	OpenID Connect ROPC
+</a>
+
+
+
+      
+    </ul>
+  
+</li>
+
+
+        </ul>
+        
+
+        
+        <hr>
+        <span class="section">The author</span>
+        
+        <ul>
+          
+
+          
+
+          
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+	</div>
+
+	<article class="article">
+		<div class="wrapper">
+			
+				<h1>Signmykey </h1>
+
+				
+
+<h2 id="signmykey">signmykey</h2>
+
+<h3 id="what-is-it">What is it ?</h3>
+
+<p>Signmykey is a server and a client used to sign SSH keys using Hashicorp <a href="https://www.vaultproject.io/docs/secrets/ssh/signed-ssh-certificates.html">Vault</a>.</p>
+
+<p>It helps you to delegate the signing part and the principals in your organization with the same workflow.</p>
+
+<p>Principals are the roles allowed within an SSH account, they are based on groups provided in Signmykey.</p>
+
+<p>It can use <strong>LDAP</strong> or <strong>OpenID Connect ROPC</strong> as authentication/principals backends.</p>
+
+<h3 id="what-do-you-need">What do you need ?</h3>
+
+<ul>
+<li><strong>One</strong> authentication system, <strong>choose</strong> between:
+
+<ul>
+<li>an LDAP server, see <a href="howtos/ldapserver/">Howto</a></li>
+<li>an OpenID Connect ROPC compliant server, such as Keycloak, see <a href="howtos/oidcropc/">Howto</a></li>
+</ul></li>
+<li>a Vault instance, see <a href="howtos/vaultpki/">Howto</a></li>
+<li>a signmykey host</li>
+</ul>
+
+<h2 id="how-does-it-work">How does it work ?</h2>
+
+<h3 id="signmykey-workflow-with-ldap">Signmykey workflow with LDAP</h3>
+
+<p><img src="images/workflow-signmykey-ldap.png" alt="Signmykey LDAP workflow" /></p>
+
+<ol>
+<li>The user uses <code>signmykey</code> then enters its credentials, Signmykey client sends to Signmykey server user credentials and user SSH public key</li>
+<li>Signmykey server sends user credentials to LDAP server (Authenticator)</li>
+<li>LDAP server returns validation to Signmykey server if successful</li>
+<li>Signmykey server sends username to LDAP server (Principals)</li>
+<li>LDAP server responds with user groups as Principals</li>
+<li>Signmykey server asks Vault to sign the public key with groups as principals</li>
+<li>Vault gives back the signed key to Signmykey server</li>
+<li>Signmykey server gives back the signed key to the user</li>
+</ol>
+
+<p>Signmykey allows you to let your LDAP users to sign theirs SSH keys with principals using the <strong>memberOf</strong> attribute.</p>
+
+<h3 id="signmykey-workflow-with-openid-connect-ropc">Signmykey workflow with OpenID Connect ROPC</h3>
+
+<p>OpenID Connect ROPC stands for OpenID Connect <a href="https://tools.ietf.org/html/rfc6749#page-37">&ldquo;Resource Owner Password Credentials&rdquo;</a> grant flow.</p>
+
+<p><img src="images/workflow-signmykey-oidcropc.png" alt="Signmykey OpenID Connect ROPC workflow" /></p>
+
+<ol>
+<li>The user uses <code>signmykey</code> then enters its credentials, Signmykey client sends to Signmykey server user credentials and user SSH public key</li>
+<li>Signmykey server sends user credentials + OIDC client ID and secret to Keycloak using Token Endpoint (Authenticator)</li>
+<li>Keycloak server responds with an authentication token if successful</li>
+<li>Signmykey server sends authentication token to Keycloak using Userinfo Endpoint (Principals)</li>
+<li>Keycloak server responds with user groups as Principals</li>
+<li>Signmykey server asks Vault to sign the public key with groups as principals</li>
+<li>Vault gives back the signed key to Signmykey server</li>
+<li>Signmykey server gives back the signed key to the user</li>
+</ol>
+
+<h3 id="ssh-workflow">SSH workflow</h3>
+
+<p>This SSH workflow is independent of the chosen Signmykey workflow.</p>
+
+<p><img src="images/workflow-ssh.png" alt="SSH workflow" /></p>
+
+<ol>
+<li>The user enters <code>ssh &lt;signmykey_user&gt;@&lt;server&gt;</code> from his terminal</li>
+<li>The SSH server verifies that the certificate
+
+<ul>
+<li>is signed with the CA installed locally</li>
+<li>is valid</li>
+<li>has the correct principals in /etc/ssh/authorized_principals/ files</li>
+</ul></li>
+</ol>
+
+			
+
+			<aside class="copyright" role="note">
+				
+				&copy; 2019 Released under the MIT license &ndash;
+				
+				Documentation built with
+				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
+				using the
+				<a href="http://github.com/digitalcraftsman/hugo-material-docs" target="_blank">Material</a> theme.
+			</aside>
+
+			<footer class="footer">
+				
+
+
+
+<nav class="pagination" aria-label="Footer">
+  <div class="previous">
+  </div>
+</nav>
+
+
+
+			</footer>
+		</div>
+	</article>
+
+	<div class="results" role="status" aria-live="polite">
+		<div class="scrollable">
+			<div class="wrapper">
+				<div class="meta"></div>
+				<div class="list"></div>
+			</div>
+		</div>
+	</div>
+</main>
+
+    <script>
+    
+      var base_url = 'https:\/\/signmykey.io\/';
+      var repo_id  = 'signmykeyio\/signmykey';
+    
+    </script>
+
+    <script src="https://signmykey.io/javascripts/application.js"></script>
+    
+
+    <script>
+      /* Add headers to scrollspy */
+      var headers   = document.getElementsByTagName("h2");
+      var scrollspy = document.getElementById('scrollspy');
+
+      if(scrollspy) {
+        if(headers.length > 0) {
+          for(var i = 0; i < headers.length; i++) {
+            var li = document.createElement("li");
+            li.setAttribute("class", "anchor");
+
+            var a  = document.createElement("a");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", headers[i].innerHTML);
+            a.innerHTML = headers[i].innerHTML;
+
+            li.appendChild(a)
+            scrollspy.appendChild(li);
+          }
+        } else {
+          scrollspy.parentElement.removeChild(scrollspy)
+        }
+
+
+        /* Add permanent link next to the headers */
+        var headers = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+        for(var i = 0; i < headers.length; i++) {
+            var a = document.createElement("a");
+            a.setAttribute("class", "headerlink");
+            a.setAttribute("href", "#" + headers[i].id);
+            a.setAttribute("title", "Permanent link")
+            a.innerHTML = "#";
+            headers[i].appendChild(a);
+        }
+      }
+    </script>
+
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
+
