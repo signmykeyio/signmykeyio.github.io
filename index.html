@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
     <title>Signmykey</title>
-    <meta name="generator" content="Hugo 0.46" />
+    <meta name="generator" content="Hugo 0.69.0" />
 
     
     <meta name="description" content="Signmykey is an automated SSH Certificate Authority">
@@ -370,39 +370,26 @@
 			
 				<h1>Signmykey </h1>
 
-				
-
-<h2 id="signmykey">signmykey</h2>
-
-<h3 id="what-is-it">What is it ?</h3>
-
+				<h2 id="signmykey">signmykey</h2>
+<h3 id="what-is-it-">What is it ?</h3>
 <p>Signmykey is a server and a client used to sign SSH keys using Hashicorp <a href="https://www.vaultproject.io/docs/secrets/ssh/signed-ssh-certificates.html">Vault</a>.</p>
-
 <p>It helps you to delegate the signing part and the principals in your organization with the same workflow.</p>
-
 <p>Principals are the roles allowed within an SSH account, they are based on groups provided in Signmykey.</p>
-
 <p>It can use <strong>LDAP</strong> or <strong>OpenID Connect ROPC</strong> as authentication/principals backends.</p>
-
-<h3 id="what-do-you-need">What do you need ?</h3>
-
+<h3 id="what-do-you-need-">What do you need ?</h3>
 <ul>
 <li><strong>One</strong> authentication system, <strong>choose</strong> between:
-
 <ul>
 <li>an LDAP server, see <a href="howtos/ldapserver/">Howto</a></li>
 <li>an OpenID Connect ROPC compliant server, such as Keycloak, see <a href="howtos/oidcropc/">Howto</a></li>
-</ul></li>
+</ul>
+</li>
 <li>a Vault instance, see <a href="howtos/vaultpki/">Howto</a></li>
 <li>a signmykey host</li>
 </ul>
-
-<h2 id="how-does-it-work">How does it work ?</h2>
-
+<h2 id="how-does-it-work-">How does it work ?</h2>
 <h3 id="signmykey-workflow-with-ldap">Signmykey workflow with LDAP</h3>
-
-<p><img src="images/workflow-signmykey-ldap.png" alt="Signmykey LDAP workflow" /></p>
-
+<p><img src="images/workflow-signmykey-ldap.png" alt="Signmykey LDAP workflow"></p>
 <ol>
 <li>The user uses <code>signmykey</code> then enters its credentials, Signmykey client sends to Signmykey server user credentials and user SSH public key</li>
 <li>Signmykey server sends user credentials to LDAP server (Authenticator)</li>
@@ -413,15 +400,10 @@
 <li>Vault gives back the signed key to Signmykey server</li>
 <li>Signmykey server gives back the signed key to the user</li>
 </ol>
-
 <p>Signmykey allows you to let your LDAP users to sign theirs SSH keys with principals using the <strong>memberOf</strong> attribute.</p>
-
 <h3 id="signmykey-workflow-with-openid-connect-ropc">Signmykey workflow with OpenID Connect ROPC</h3>
-
 <p>OpenID Connect ROPC stands for OpenID Connect <a href="https://tools.ietf.org/html/rfc6749#page-37">&ldquo;Resource Owner Password Credentials&rdquo;</a> grant flow.</p>
-
-<p><img src="images/workflow-signmykey-oidcropc.png" alt="Signmykey OpenID Connect ROPC workflow" /></p>
-
+<p><img src="images/workflow-signmykey-oidcropc.png" alt="Signmykey OpenID Connect ROPC workflow"></p>
 <ol>
 <li>The user uses <code>signmykey</code> then enters its credentials, Signmykey client sends to Signmykey server user credentials and user SSH public key</li>
 <li>Signmykey server sends user credentials + OIDC client ID and secret to Keycloak using Token Endpoint (Authenticator)</li>
@@ -432,29 +414,25 @@
 <li>Vault gives back the signed key to Signmykey server</li>
 <li>Signmykey server gives back the signed key to the user</li>
 </ol>
-
 <h3 id="ssh-workflow">SSH workflow</h3>
-
 <p>This SSH workflow is independent of the chosen Signmykey workflow.</p>
-
-<p><img src="images/workflow-ssh.png" alt="SSH workflow" /></p>
-
+<p><img src="images/workflow-ssh.png" alt="SSH workflow"></p>
 <ol>
 <li>The user enters <code>ssh &lt;signmykey_user&gt;@&lt;server&gt;</code> from his terminal</li>
 <li>The SSH server verifies that the certificate
-
 <ul>
 <li>is signed with the CA installed locally</li>
 <li>is valid</li>
 <li>has the correct principals in /etc/ssh/authorized_principals/ files</li>
-</ul></li>
+</ul>
+</li>
 </ol>
 
 			
 
 			<aside class="copyright" role="note">
 				
-				&copy; 2019 Released under the MIT license &ndash;
+				&copy; 2021 Released under the MIT license &ndash;
 				
 				Documentation built with
 				<a href="https://www.gohugo.io" target="_blank">Hugo</a>

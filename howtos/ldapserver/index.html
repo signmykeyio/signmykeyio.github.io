@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
     <title>LDAP Server - Signmykey</title>
-    <meta name="generator" content="Hugo 0.46" />
+    <meta name="generator" content="Hugo 0.69.0" />
 
     
     <meta name="description" content="Signmykey is an automated SSH Certificate Authority">
@@ -366,46 +366,28 @@
 		<div class="wrapper">
 			<h1>LDAP Server </h1>
 
-			
-
-<p>This HOWTO describe how to configure an LDAP server using <a href="https://github.com/glauth/glauth">glauth</a>.</p>
-
+			<p>This HOWTO describe how to configure an LDAP server using <a href="https://github.com/glauth/glauth">glauth</a>.</p>
 <h2 id="installation">Installation</h2>
-
 <h3 id="download">Download</h3>
-
-<pre><code class="language-sh">wget https://github.com/glauth/glauth/releases/download/v1.1.0/glauth64 -O /usr/local/bin/glauth
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">wget https://github.com/glauth/glauth/releases/download/v1.1.0/glauth64 -O /usr/local/bin/glauth
 chmod +x /usr/local/bin/glauth
-</code></pre>
-
-<h3 id="user-and-directories">User and directories</h3>
-
-<pre><code class="language-sh">useradd --no-create-home -s /bin/false glauth
-mkdir -m 700 /etc/glauth
+</code></pre></div><h3 id="user-and-directories">User and directories</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">useradd --no-create-home -s /bin/false glauth
+mkdir -m <span style="color:#ae81ff">700</span> /etc/glauth
 wget https://raw.githubusercontent.com/glauth/glauth/master/sample-simple.cfg -O /etc/glauth/glauth.cfg
 chown -R glauth: /etc/glauth/
-</code></pre>
-
-<h3 id="configuration">Configuration</h3>
-
+</code></pre></div><h3 id="configuration">Configuration</h3>
 <p>The default configuration downloaded during the previous step contains some users.</p>
-
 <h3 id="launch">Launch</h3>
-
-<pre><code class="language-sh">runuser -s /bin/bash -l glauth -c 'glauth -c /etc/glauth/glauth.cfg'
-</code></pre>
-
-<h2 id="usage">Usage</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">runuser -s /bin/bash -l glauth -c <span style="color:#e6db74">&#39;glauth -c /etc/glauth/glauth.cfg&#39;</span>
+</code></pre></div><h2 id="usage">Usage</h2>
 <p>List LDAP entries</p>
-
-<pre><code class="language-sh">ldapsearch -LLL -H ldap://localhost:3893 -D cn=serviceuser,ou=svcaccts,dc=glauth,dc=com -w mysecret -x -bdc=glauth,dc=com
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ldapsearch -LLL -H ldap://localhost:3893 -D cn<span style="color:#f92672">=</span>serviceuser,ou<span style="color:#f92672">=</span>svcaccts,dc<span style="color:#f92672">=</span>glauth,dc<span style="color:#f92672">=</span>com -w mysecret -x -bdc<span style="color:#f92672">=</span>glauth,dc<span style="color:#f92672">=</span>com
+</code></pre></div>
 
 			<aside class="copyright" role="note">
 				
-				&copy; 2019 Released under the MIT license &ndash;
+				&copy; 2021 Released under the MIT license &ndash;
 				
 				Documentation built with
 				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
@@ -419,7 +401,7 @@ chown -R glauth: /etc/glauth/
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://signmykey.io/backends/authenticator/" title="Authenticator">
+      <a href="https://signmykey.io/howtos/oidcropc/" title="OpenID Connect ROPC compliant server">
         <span class="direction">
           Previous
         </span>
@@ -429,7 +411,7 @@ chown -R glauth: /etc/glauth/
           </div>
           <div class="stretch">
             <div class="title">
-              Authenticator
+              OpenID Connect ROPC compliant server
             </div>
           </div>
         </div>
@@ -439,14 +421,14 @@ chown -R glauth: /etc/glauth/
 
   <div class="next">
   
-      <a href="https://signmykey.io/howtos/oidcropc/" title="OpenID Connect ROPC compliant server">
+      <a href="https://signmykey.io/backends/authenticator/" title="Authenticator">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              OpenID Connect ROPC compliant server
+              Authenticator
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
     <title>Vault PKI - Signmykey</title>
-    <meta name="generator" content="Hugo 0.46" />
+    <meta name="generator" content="Hugo 0.69.0" />
 
     
     <meta name="description" content="Signmykey is an automated SSH Certificate Authority">
@@ -366,33 +366,21 @@
 		<div class="wrapper">
 			<h1>Vault PKI </h1>
 
-			
-
-<p>This HOWTO describe how to configure a Vault server with a PKI to sign its own certificate.</p>
-
+			<p>This HOWTO describe how to configure a Vault server with a PKI to sign its own certificate.</p>
 <h2 id="installation">Installation</h2>
-
 <h3 id="download">Download</h3>
-
-<pre><code class="language-sh">apt install unzip
-VAULTVERSION=1.1.3
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">apt install unzip
+VAULTVERSION<span style="color:#f92672">=</span>1.1.3
 cd /tmp
-wget https://releases.hashicorp.com/vault/${VAULTVERSION}/vault_${VAULTVERSION}_linux_amd64.zip
-unzip vault_${VAULTVERSION}_linux_amd64.zip &amp;&amp; rm vault_${VAULTVERSION}_linux_amd64.zip
+wget https://releases.hashicorp.com/vault/<span style="color:#e6db74">${</span>VAULTVERSION<span style="color:#e6db74">}</span>/vault_<span style="color:#e6db74">${</span>VAULTVERSION<span style="color:#e6db74">}</span>_linux_amd64.zip
+unzip vault_<span style="color:#e6db74">${</span>VAULTVERSION<span style="color:#e6db74">}</span>_linux_amd64.zip <span style="color:#f92672">&amp;&amp;</span> rm vault_<span style="color:#e6db74">${</span>VAULTVERSION<span style="color:#e6db74">}</span>_linux_amd64.zip
 sudo mv vault /usr/local/bin/vault
-</code></pre>
-
-<h3 id="user-and-directories">User and directories</h3>
-
-<pre><code class="language-sh">useradd --no-create-home -s /bin/false vault
-mkdir -m 700 /etc/vault /var/lib/vault
+</code></pre></div><h3 id="user-and-directories">User and directories</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">useradd --no-create-home -s /bin/false vault
+mkdir -m <span style="color:#ae81ff">700</span> /etc/vault /var/lib/vault
 chown vault: /etc/vault /var/lib/vault
-</code></pre>
-
-<h3 id="configuration">Configuration</h3>
-
+</code></pre></div><h3 id="configuration">Configuration</h3>
 <p>Config file <em>/etc/vault/vault.conf</em></p>
-
 <pre><code>backend &quot;file&quot; {
   path = &quot;/var/lib/vault&quot;
 }
@@ -406,38 +394,20 @@ listener &quot;tcp&quot; {
 
 disable_mlock = true
 ui = true
-</code></pre>
-
-<h3 id="launch">Launch</h3>
-
+</code></pre><h3 id="launch">Launch</h3>
 <pre><code>runuser -s /bin/bash -l vault -c 'vault server -config /etc/vault/vault.conf'
-</code></pre>
-
-<h3 id="init">Init</h3>
-
-<pre><code class="language-sh">export VAULT_ADDR=http://127.0.0.1:8200/
-vault operator init -key-shares=1 -key-threshold=1
-</code></pre>
-
-<p>Keys</p>
-
+</code></pre><h3 id="init">Init</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export VAULT_ADDR<span style="color:#f92672">=</span>http://127.0.0.1:8200/
+vault operator init -key-shares<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> -key-threshold<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</code></pre></div><p>Keys</p>
 <pre><code>Unseal Key 1: p8zOywmj882TWCfIX0xekQJQcHuGQxm4QwmUyT7qDkA=
 
 Initial Root Token: 5682b22a-02cd-4678-7883-202afed596dc
-</code></pre>
-
-<h3 id="unseal">Unseal</h3>
-
-<pre><code class="language-sh">vault operator unseal
-</code></pre>
-
-<h3 id="vault-root-login">vault root login</h3>
-
-<pre><code class="language-sh">vault login
-</code></pre>
-
-<h2 id="enable-pki">Enable PKI</h2>
-
+</code></pre><h3 id="unseal">Unseal</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vault operator unseal
+</code></pre></div><h3 id="vault-root-login">vault root login</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vault login
+</code></pre></div><h2 id="enable-pki">Enable PKI</h2>
 <pre><code>vault secrets enable pki
 vault secrets tune -max-lease-ttl=87600h pki
 vault write pki/root/generate/internal common_name=MyCA ttl=87600h
@@ -483,26 +453,15 @@ GCUb1fAIt02FdUk7U+bV/6a8XPx1e8lqKpopM+ylflHS02bcTXlzwYOV1x9aAPp8
 LgBMtfqPzmS4UxfWhPdhaF+48rA2b5zGXEy5Lj7Lr+JcAMIC
 -----END CERTIFICATE-----
 serial_number    4b:35:7a:df:b4:93:66:88:60:4a:23:8c:ae:f0:c3:f4:a7:b5:ff:9a
-</code></pre>
-
-<h3 id="add-ca-public-cert-to-server">Add CA public cert to server</h3>
-
-<pre><code class="language-sh">wget http://127.0.0.1:8200/v1/pki/ca/pem -O /usr/local/share/ca-certificates/MyCA.crt
+</code></pre><h3 id="add-ca-public-cert-to-server">Add CA public cert to server</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">wget http://127.0.0.1:8200/v1/pki/ca/pem -O /usr/local/share/ca-certificates/MyCA.crt
 update-ca-certificates
-</code></pre>
-
-<h3 id="add-ca-public-cert-to-firefox">Add CA public cert to firefox</h3>
-
+</code></pre></div><h3 id="add-ca-public-cert-to-firefox">Add CA public cert to firefox</h3>
 <p><a href="https://www.cyberciti.biz/faq/firefox-adding-trusted-ca/">https://www.cyberciti.biz/faq/firefox-adding-trusted-ca/</a></p>
-
 <h3 id="ca-role">CA role</h3>
-
-<pre><code class="language-sh">vault write pki/roles/allow-all-domains allow_any_name=true max_ttl=8760h
-</code></pre>
-
-<h3 id="generate-vault-own-certificate">Generate vault own certificate</h3>
-
-<pre><code class="language-sh">vault write pki/issue/allow-all-domains common_name=&quot;vaultserver&quot; alt_names=&quot;localhost&quot; ip_sans=&quot;127.0.0.1&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vault write pki/roles/allow-all-domains allow_any_name<span style="color:#f92672">=</span>true max_ttl<span style="color:#f92672">=</span>8760h
+</code></pre></div><h3 id="generate-vault-own-certificate">Generate vault own certificate</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vault write pki/issue/allow-all-domains common_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;vaultserver&#34;</span> alt_names<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;localhost&#34;</span> ip_sans<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;127.0.0.1&#34;</span>
 Key                 Value
 ---                 -----
 certificate         -----BEGIN CERTIFICATE-----
@@ -523,7 +482,7 @@ DQYJKoZIhvcNAQELBQADggEBAEs84gw0k9DODkhSAae4a73LHCWLiyjwN41Y+RCA
 3YvO22cVx57bsU+DUcNBCWHWDCESGSlJThHIvaTCqPwobFEnDOGv9N+ITWfcc+hJ
 BIkevpb9W7iCxOV8KMBBsJQrhClVkwHsik7sODESWG+fWLIuZh/fVTBOegKmVazb
 +Q3wYoHja7+osoqcUssLPro1/SYCunDt1UI/qKU43/JgDTFXTBzSqCiqG6QU7XHg
-Max9HpPB/0uDtQjsr8VVOw1/ST4dDLdOBT7I2/0LcyhzuCo=
+Max9HpPB/0uDtQjsr8VVOw1/ST4dDLdOBT7I2/0LcyhzuCo<span style="color:#f92672">=</span>
 -----END CERTIFICATE-----
 issuing_ca          -----BEGIN CERTIFICATE-----
 MIIDIDCCAgigAwIBAgIUSzV637STZohgSiOMrvDD9Ke1/5owDQYJKoZIhvcNAQEL
@@ -569,24 +528,17 @@ uA6mz/kuHyIp8bZZbHx5rzfnWo2SPxv+zKMNKoXlUl86lzqZQsuKwxx7/7OtTolF
 nXbdkIDJZys55mXK6KFvNZc2kBYdD4QThergad0b+s66FPwcDr6FtjVVHoN5Qmwl
 cABVAoGAbYHJTrUF8lLz/QyFBVux9M8+w9GGfcXy4FfwPb41QV7cIqpph0s340Pu
 8RMz6JMlZrtU5GOUF+sGg5uDpxwatjYThjvZz4dJ4yHmd1JuX0G+jAEBnKf3bYbB
-YCP2+bQiqSG4BwzR3gT1iuQZv0OUW6UIYFY3gD8Gg2Cp/q5GHFc=
+YCP2+bQiqSG4BwzR3gT1iuQZv0OUW6UIYFY3gD8Gg2Cp/q5GHFc<span style="color:#f92672">=</span>
 -----END RSA PRIVATE KEY-----
 private_key_type    rsa
 serial_number       73:a0:d7:af:5e:3d:be:18:2a:cd:80:7a:5b:a1:61:2b:ae:6f:6e:00
-</code></pre>
-
-<h3 id="create-cert-files-from-previous-step">Create cert files from previous step</h3>
-
+</code></pre></div><h3 id="create-cert-files-from-previous-step">Create cert files from previous step</h3>
 <pre><code>vi /etc/vault/vault.key # private_key entry from previous step
 chmod 400 /etc/vault/vault.key
 vi /etc/vault/vault.pem # certificate entry from previous step
 chown vault: /etc/vault/vault.key /etc/vault/vault.pem
-</code></pre>
-
-<h3 id="vault-config-with-tls">Vault config with TLS</h3>
-
+</code></pre><h3 id="vault-config-with-tls">Vault config with TLS</h3>
 <p>First stop vault server then modify its configuration <em>/etc/vault/vault.conf</em></p>
-
 <pre><code>backend &quot;file&quot; {
   path = &quot;/var/lib/vault&quot;
 }
@@ -600,25 +552,18 @@ listener &quot;tcp&quot; {
 
 disable_mlock = true
 ui = true
-</code></pre>
-
-<p>Then start vault server again</p>
-
+</code></pre><p>Then start vault server again</p>
 <pre><code>runuser -s /bin/bash -l vault -c 'vault server -config /etc/vault/vault.conf'
 
 export VAULT_ADDR=https://localhost:8200/
-</code></pre>
-
-<h3 id="then-unseal-again">Then unseal again</h3>
-
-<pre><code class="language-sh">vault status
+</code></pre><h3 id="then-unseal-again">Then unseal again</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vault status
 vault operator unseal
-</code></pre>
-
+</code></pre></div>
 
 			<aside class="copyright" role="note">
 				
-				&copy; 2019 Released under the MIT license &ndash;
+				&copy; 2021 Released under the MIT license &ndash;
 				
 				Documentation built with
 				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
@@ -632,25 +577,25 @@ vault operator unseal
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
+  </div>
+
+  <div class="next">
+  
       <a href="https://signmykey.io/getting-started/vault/" title="Vault">
         <span class="direction">
-          Previous
+          Next
         </span>
         <div class="page">
-          <div class="button button-previous" role="button" aria-label="Previous">
-            <i class="icon icon-back"></i>
-          </div>
           <div class="stretch">
             <div class="title">
               Vault
             </div>
           </div>
+          <div class="button button-next" role="button" aria-label="Next">
+            <i class="icon icon-forward"></i>
+          </div>
         </div>
       </a>
-  
-  </div>
-
-  <div class="next">
   
   </div>
 </nav>

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
     <title>Vault - Signmykey</title>
-    <meta name="generator" content="Hugo 0.46" />
+    <meta name="generator" content="Hugo 0.69.0" />
 
     
     <meta name="description" content="Signmykey is an automated SSH Certificate Authority">
@@ -366,103 +366,68 @@
 		<div class="wrapper">
 			<h1>Vault </h1>
 
-			
-
-<p>Before you can use Signmykey, you must configure your Vault server to allow its usage.</p>
-
+			<p>Before you can use Signmykey, you must configure your Vault server to allow its usage.</p>
 <h2 id="enable-ssh">Enable ssh</h2>
-
 <p>First, enable the ssh secret engine to sign keys.</p>
-
-<pre><code class="language-sh">vault secrets enable ssh
-</code></pre>
-
-<h2 id="enable-ca">Enable CA</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vault secrets enable ssh
+</code></pre></div><h2 id="enable-ca">Enable CA</h2>
 <p>Generate CA for ssh.</p>
-
-<pre><code class="language-sh">vault write -f ssh/config/ca
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vault write -f ssh/config/ca
 Key           Value
 ---           -----
-public_key    ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCwjLDgrISTB9no8Y4KE+1A7nvue1hfodlhC88jeXLbmop+mbvsG237FAs1TACHRxmyMfeM1b7N6FmLgisnf0Btk8tGPvikNcbHMf4kq7FwV2WeoSgHvtXex/dalrAnLbumthJUtYxY8dFticpxBp4guicretGbQ5LjVpOAPW8PhifrmoUgGUJ44eWET1Yg6sEiV4ZXv3nlXb7YFTJSaP3StJ4rCTFwCZA2NBV2ecBGee28+MtRx+bERecMic4GeXHXRhtHhf0gf8PaO7ePQ5pXPC1dxLG/GHAhwl04JUfc49NsWPavVuY5jUNFqfMZ4r0rN/TLl3XDyLkPPOGINkyoUoAW1Ji6DScnahYFA4i6oxQ0g3He5DWd71i6jm/3jodZ2lJjZyO8m89ceGr+f3Gwl8KVP2FQ+//psMADEcROJbK0v8YpSzJxM4tO7nsQ+FDKCbXGHAfdqwPS3TdI2AtU40FDEyf+cb41FtDCALBNdf4OoPg3gp9K2TVYvLG0iiz/1Poupqcnip04icvxFaTIAd8yzQa+9d3qzv7g6WxDpvcE04Z5VI/Lzw2wNXXOM/TdAm9YJco1vMrlJQAb8evstpSSSriMlQfeJUKFOKldgLF0cMLhgQFi5vF2R6t517N6rzy3Nxm4vKB/BomX8+iO9jXwscFSCDJt1HduXAtaQQ==
-</code></pre>
-
-<h2 id="export-ca-public-key">Export CA public key</h2>
-
-<pre><code class="language-sh">vault read -field=public_key ssh/config/ca &gt; /etc/ssh/ca.pem
-</code></pre>
-
-<p>This certificate will be used on ssh servers, so keep it to copy its content later.</p>
-
+public_key    ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCwjLDgrISTB9no8Y4KE+1A7nvue1hfodlhC88jeXLbmop+mbvsG237FAs1TACHRxmyMfeM1b7N6FmLgisnf0Btk8tGPvikNcbHMf4kq7FwV2WeoSgHvtXex/dalrAnLbumthJUtYxY8dFticpxBp4guicretGbQ5LjVpOAPW8PhifrmoUgGUJ44eWET1Yg6sEiV4ZXv3nlXb7YFTJSaP3StJ4rCTFwCZA2NBV2ecBGee28+MtRx+bERecMic4GeXHXRhtHhf0gf8PaO7ePQ5pXPC1dxLG/GHAhwl04JUfc49NsWPavVuY5jUNFqfMZ4r0rN/TLl3XDyLkPPOGINkyoUoAW1Ji6DScnahYFA4i6oxQ0g3He5DWd71i6jm/3jodZ2lJjZyO8m89ceGr+f3Gwl8KVP2FQ+//psMADEcROJbK0v8YpSzJxM4tO7nsQ+FDKCbXGHAfdqwPS3TdI2AtU40FDEyf+cb41FtDCALBNdf4OoPg3gp9K2TVYvLG0iiz/1Poupqcnip04icvxFaTIAd8yzQa+9d3qzv7g6WxDpvcE04Z5VI/Lzw2wNXXOM/TdAm9YJco1vMrlJQAb8evstpSSSriMlQfeJUKFOKldgLF0cMLhgQFi5vF2R6t517N6rzy3Nxm4vKB/BomX8+iO9jXwscFSCDJt1HduXAtaQQ<span style="color:#f92672">==</span>
+</code></pre></div><h2 id="export-ca-public-key">Export CA public key</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vault read -field<span style="color:#f92672">=</span>public_key ssh/config/ca &gt; /etc/ssh/ca.pem
+</code></pre></div><p>This certificate will be used on ssh servers, so keep it to copy its content later.</p>
 <h2 id="signmykey-configuration">Signmykey configuration</h2>
-
 <h3 id="vault-sign-user-role">Vault sign user role</h3>
-
-<pre><code class="language-sh">echo '{                                            &quot;allow_user_certificates&quot;: true,
-  &quot;allowed_users&quot;: &quot;*&quot;,
-  &quot;allow_user_key_ids&quot;: true,
-  &quot;default_extensions&quot;: [
-    {
-      &quot;permit-pty&quot;: &quot;&quot;
-    }
-  ],
-  &quot;key_type&quot;: &quot;ca&quot;,
-  &quot;default_user&quot;: &quot;root&quot;,
-  &quot;max_ttl&quot;: &quot;12h&quot; ,
-  &quot;ttl&quot;: &quot;30m&quot;
-}' &gt; sign-user-role.json
-</code></pre>
-
-<p>Then</p>
-
-<pre><code class="language-sh">vault write ssh/roles/sign-user-role @sign-user-role.json
-</code></pre>
-
-<h3 id="vault-policy">Vault policy</h3>
-
-<pre><code class="language-sh">vault write sys/policy/signmykey-server policy=-&lt;&lt;&quot;EOH&quot;
-path &quot;ssh/config/ca&quot; {
-  capabilities = [&quot;read&quot;]
-}
-path &quot;ssh/sign/sign-user-role&quot; {
-  capabilities = [&quot;create&quot;, &quot;update&quot;]
-}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">echo <span style="color:#e6db74">&#39;{                                            &#34;allow_user_certificates&#34;: true,
+</span><span style="color:#e6db74">  &#34;allowed_users&#34;: &#34;*&#34;,
+</span><span style="color:#e6db74">  &#34;allow_user_key_ids&#34;: true,
+</span><span style="color:#e6db74">  &#34;default_extensions&#34;: [
+</span><span style="color:#e6db74">    {
+</span><span style="color:#e6db74">      &#34;permit-pty&#34;: &#34;&#34;
+</span><span style="color:#e6db74">    }
+</span><span style="color:#e6db74">  ],
+</span><span style="color:#e6db74">  &#34;key_type&#34;: &#34;ca&#34;,
+</span><span style="color:#e6db74">  &#34;default_user&#34;: &#34;root&#34;,
+</span><span style="color:#e6db74">  &#34;max_ttl&#34;: &#34;12h&#34; ,
+</span><span style="color:#e6db74">  &#34;ttl&#34;: &#34;30m&#34;
+</span><span style="color:#e6db74">}&#39;</span> &gt; sign-user-role.json
+</code></pre></div><p>Then</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vault write ssh/roles/sign-user-role @sign-user-role.json
+</code></pre></div><h3 id="vault-policy">Vault policy</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vault write sys/policy/signmykey-server policy<span style="color:#f92672">=</span>-&lt;&lt;<span style="color:#e6db74">&#34;EOH&#34;</span>
+path <span style="color:#e6db74">&#34;ssh/config/ca&#34;</span> <span style="color:#f92672">{</span>
+  capabilities <span style="color:#f92672">=</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;read&#34;</span><span style="color:#f92672">]</span>
+<span style="color:#f92672">}</span>
+path <span style="color:#e6db74">&#34;ssh/sign/sign-user-role&#34;</span> <span style="color:#f92672">{</span>
+  capabilities <span style="color:#f92672">=</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;create&#34;</span>, <span style="color:#e6db74">&#34;update&#34;</span><span style="color:#f92672">]</span>
+<span style="color:#f92672">}</span>
 EOH
-</code></pre>
-
-<h3 id="vault-approle">Vault AppRole</h3>
-
-<pre><code class="language-sh">vault auth enable approle
-</code></pre>
-
-<pre><code class="language-sh">vault write auth/approle/role/signmykey-server \
-  token_num_uses=0 \
-  token_ttl=1m \
-  token_max_ttl=1m \
-  policies=signmykey-server
-</code></pre>
-
-<h3 id="vault-approle-creds">Vault AppRole creds</h3>
-
-<pre><code class="language-sh">vault read auth/approle/role/signmykey-server/role-id
+</code></pre></div><h3 id="vault-approle">Vault AppRole</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vault auth enable approle
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vault write auth/approle/role/signmykey-server <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  token_num_uses<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  token_ttl<span style="color:#f92672">=</span>1m <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  token_max_ttl<span style="color:#f92672">=</span>1m <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  policies<span style="color:#f92672">=</span>signmykey-server
+</code></pre></div><h3 id="vault-approle-creds">Vault AppRole creds</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vault read auth/approle/role/signmykey-server/role-id
 Key        Value
 ---        -----
 role_id    11940c2d-4639-9358-d750-cdb7cf409ff4
-</code></pre>
-
-<pre><code class="language-sh">vault write -f auth/approle/role/signmykey-server/secret-id
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vault write -f auth/approle/role/signmykey-server/secret-id
 Key                   Value
 ---                   -----
 secret_id             8b4c901f-1f84-5049-17ee-92de12b6b1e5
 secret_id_accessor    0921e287-5383-0fbd-5061-aef29618b7a0
-</code></pre>
-
-<p>The role_id and secret_id will be used in signmykey server configuration.</p>
+</code></pre></div><p>The role_id and secret_id will be used in signmykey server configuration.</p>
 
 
 			<aside class="copyright" role="note">
 				
-				&copy; 2019 Released under the MIT license &ndash;
+				&copy; 2021 Released under the MIT license &ndash;
 				
 				Documentation built with
 				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
@@ -476,7 +441,7 @@ secret_id_accessor    0921e287-5383-0fbd-5061-aef29618b7a0
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://signmykey.io/getting-started/signmykey/" title="Signmykey">
+      <a href="https://signmykey.io/howtos/vaultpki/" title="Vault PKI">
         <span class="direction">
           Previous
         </span>
@@ -486,7 +451,7 @@ secret_id_accessor    0921e287-5383-0fbd-5061-aef29618b7a0
           </div>
           <div class="stretch">
             <div class="title">
-              Signmykey
+              Vault PKI
             </div>
           </div>
         </div>
@@ -496,14 +461,14 @@ secret_id_accessor    0921e287-5383-0fbd-5061-aef29618b7a0
 
   <div class="next">
   
-      <a href="https://signmykey.io/howtos/vaultpki/" title="Vault PKI">
+      <a href="https://signmykey.io/getting-started/sshserver/" title="SSH Server">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Vault PKI
+              SSH Server
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

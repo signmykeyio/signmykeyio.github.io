@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
     <title>OpenID Connect ROPC compliant server - Signmykey</title>
-    <meta name="generator" content="Hugo 0.46" />
+    <meta name="generator" content="Hugo 0.69.0" />
 
     
     <meta name="description" content="Signmykey is an automated SSH Certificate Authority">
@@ -366,53 +366,32 @@
 		<div class="wrapper">
 			<h1>OpenID Connect ROPC compliant server </h1>
 
-			
-
-<p>This HOWTO describe how to configure an OpenID Connect ROPC client using <a href="https://www.keycloak.org/">Keycloak</a>.</p>
-
+			<p>This HOWTO describe how to configure an OpenID Connect ROPC client using <a href="https://www.keycloak.org/">Keycloak</a>.</p>
 <p>Your Keycloak server must be already setup.</p>
-
 <h2 id="create-a-new-client-in-your-realm">Create a new client in your Realm</h2>
-
 <p>Using Admin web interface:</p>
-
-<p><img src="../../images/keycloak-client1.png" alt="New client" /></p>
-
+<p><img src="../../images/keycloak-client1.png" alt="New client"></p>
 <p>Important options:</p>
-
 <ul>
 <li>Client ID: signmykey (will be used in signmykey config file)</li>
 <li>Client Protocol: openid-connect</li>
 </ul>
-
 <h2 id="client-options">Client options</h2>
-
-<p><img src="../../images/keycloak-client2.png" alt="Options" /></p>
-
+<p><img src="../../images/keycloak-client2.png" alt="Options"></p>
 <p>Important options:</p>
-
 <ul>
 <li>Client ID: signmykey</li>
 <li>Access Type: confidential</li>
 <li>Direct Access Grants Enabled: ON (This enables ROPC grant flow)</li>
 </ul>
-
 <h2 id="grab-client-secret">Grab Client Secret</h2>
-
 <p>Once you saved configuration with &ldquo;Access Type: confidential&rdquo;, you now have access to credentials.</p>
-
 <p><strong>Secret</strong> will be used in signmykey config file.</p>
-
-<p><img src="../../images/keycloak-client3.png" alt="Client Secret" /></p>
-
+<p><img src="../../images/keycloak-client3.png" alt="Client Secret"></p>
 <h2 id="create-a-protocol-mapper-for-groups">Create a protocol Mapper for groups</h2>
-
 <p>This option will provide groups to userinfo as &ldquo;oidc-groups&rdquo; entry.</p>
-
-<p><img src="../../images/keycloak-client4.png" alt="Protocol Mapper" /></p>
-
+<p><img src="../../images/keycloak-client4.png" alt="Protocol Mapper"></p>
 <p>Important options:</p>
-
 <ul>
 <li>Name: oidc-groups</li>
 <li>Mapper Type: Group Membership</li>
@@ -426,7 +405,7 @@
 
 			<aside class="copyright" role="note">
 				
-				&copy; 2019 Released under the MIT license &ndash;
+				&copy; 2021 Released under the MIT license &ndash;
 				
 				Documentation built with
 				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
@@ -440,7 +419,7 @@
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://signmykey.io/howtos/ldapserver/" title="LDAP Server">
+      <a href="https://signmykey.io/backends/principals/" title="Principals">
         <span class="direction">
           Previous
         </span>
@@ -450,7 +429,7 @@
           </div>
           <div class="stretch">
             <div class="title">
-              LDAP Server
+              Principals
             </div>
           </div>
         </div>
@@ -460,14 +439,14 @@
 
   <div class="next">
   
-      <a href="https://signmykey.io/backends/principals/" title="Principals">
+      <a href="https://signmykey.io/howtos/ldapserver/" title="LDAP Server">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Principals
+              LDAP Server
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
     <title>Signmykey - Signmykey</title>
-    <meta name="generator" content="Hugo 0.46" />
+    <meta name="generator" content="Hugo 0.69.0" />
 
     
     <meta name="description" content="Signmykey is an automated SSH Certificate Authority">
@@ -366,51 +366,28 @@
 		<div class="wrapper">
 			<h1>Signmykey </h1>
 
-			
-
-<h2 id="installation">Installation</h2>
-
+			<h2 id="installation">Installation</h2>
 <p>On Ubuntu 16.04+, add signmykey repository and key:</p>
-
 <pre><code>echo &quot;deb https://apt.signmykey.io/ stable main&quot; &gt; /etc/apt/sources.list.d/signmykey.list
 curl https://gpg.signmykey.io/signmykey.pub | apt-key add -
-</code></pre>
-
-<p>Then</p>
-
-<pre><code class="language-sh">useradd --no-create-home -s /bin/false signmykey
-apt update &amp;&amp; apt install signmykey
+</code></pre><p>Then</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">useradd --no-create-home -s /bin/false signmykey
+apt update <span style="color:#f92672">&amp;&amp;</span> apt install signmykey
 wget https://raw.githubusercontent.com/signmykeyio/signmykey/master/signmykey.service -O /etc/systemd/system/signmykey.service
 systemctl enable signmykey.service
-</code></pre>
-
-<pre><code>mkdir -m 700 /etc/signmykey
-</code></pre>
-
-<h2 id="server-certificate">Server certificate</h2>
-
+</code></pre></div><pre><code>mkdir -m 700 /etc/signmykey
+</code></pre><h2 id="server-certificate">Server certificate</h2>
 <p>Generate a certificate for signmykey server using Vault PKI</p>
-
 <p><strong>Note</strong>: you can use another certificate provider</p>
-
-<pre><code class="language-sh">vault write pki/issue/allow-all-domains common_name=&quot;signmykeyserver&quot; alt_names=&quot;localhost&quot; ip_sans=&quot;127.0.0.1&quot;
-</code></pre>
-
-<p>Copy the output from the previous command</p>
-
-<pre><code class="language-sh">vi /etc/signmykey/server.key # certificate key
-vi /etc/signmykey/server.pem # private_key key
-chmod 400 /etc/signmykey/server.key
-</code></pre>
-
-<h2 id="server-configuration">Server configuration</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vault write pki/issue/allow-all-domains common_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;signmykeyserver&#34;</span> alt_names<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;localhost&#34;</span> ip_sans<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;127.0.0.1&#34;</span>
+</code></pre></div><p>Copy the output from the previous command</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vi /etc/signmykey/server.key <span style="color:#75715e"># certificate key</span>
+vi /etc/signmykey/server.pem <span style="color:#75715e"># private_key key</span>
+chmod <span style="color:#ae81ff">400</span> /etc/signmykey/server.key
+</code></pre></div><h2 id="server-configuration">Server configuration</h2>
 <p>File <em>/etc/signmykey/server.yml</em></p>
-
 <p>In this file, you put the Vault AppRole credentials.</p>
-
 <h3 id="ldap-configuration-alternative">LDAP configuration alternative</h3>
-
 <pre><code>authenticatorType: ldap
 authenticatorOpts:
   ldapAddr: localhost
@@ -448,10 +425,7 @@ address: &quot;0.0.0.0:443&quot;
 tlsDisable: false
 tlsCert: &quot;/etc/signmykey/server.pem&quot; 
 tlsKey: &quot;/etc/signmykey/server.key&quot;
-</code></pre>
-
-<h3 id="oidc-ropc-configuration-alternative">OIDC ROPC configuration alternative</h3>
-
+</code></pre><h3 id="oidc-ropc-configuration-alternative">OIDC ROPC configuration alternative</h3>
 <pre><code>authenticatorType: oidcropc
 authenticatorOpts:
   oidcTokenEndpoint: &quot;https://idp.my.corp/auth/realms/mycorp/protocol/openid-connect/token&quot;
@@ -478,53 +452,26 @@ address: &quot;0.0.0.0:443&quot;
 tlsDisable: false
 tlsCert: &quot;/etc/signmykey/server.pem&quot; 
 tlsKey: &quot;/etc/signmykey/server.key&quot;
-</code></pre>
-
-<h3 id="secure-the-config-file">Secure the config file</h3>
-
-<pre><code class="language-sh">chmod 600 /etc/signmykey/server.yml
+</code></pre><h3 id="secure-the-config-file">Secure the config file</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">chmod <span style="color:#ae81ff">600</span> /etc/signmykey/server.yml
 chown -R signmykey: /etc/signmykey
-</code></pre>
-
-<h3 id="server-start">Server start</h3>
-
-<pre><code class="language-sh">systemctl start signmykey.service
+</code></pre></div><h3 id="server-start">Server start</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">systemctl start signmykey.service
 systemctl status signmykey.service
-</code></pre>
-
-<h2 id="client-configuration">Client configuration</h2>
-
+</code></pre></div><h2 id="client-configuration">Client configuration</h2>
 <h3 id="global-configuration">Global configuration</h3>
-
 <pre><code>mkdir /etc/signmykey
-</code></pre>
-
-<p>Content of the <em>/etc/signmykey/client.yml</em> file:</p>
-
+</code></pre><p>Content of the <em>/etc/signmykey/client.yml</em> file:</p>
 <pre><code>addr: &quot;https://signmykeyserver/&quot;
-</code></pre>
-
-<h3 id="user-configuration">User configuration</h3>
-
+</code></pre><h3 id="user-configuration">User configuration</h3>
 <p>Content of the <em>~/.signmykey.yml</em> file:</p>
-
 <pre><code>addr: &quot;https://signmykeyserver/&quot;
-</code></pre>
-
-<h2 id="client-usage">Client usage</h2>
-
+</code></pre><h2 id="client-usage">Client usage</h2>
 <h3 id="sign-your-key">Sign your key</h3>
-
-<pre><code class="language-sh">signmykey -u johndoe
-</code></pre>
-
-<h3 id="verify-your-key-principals">Verify your key principals</h3>
-
-<pre><code class="language-sh">ssh-keygen -Lf ~/.ssh/id_rsa-cert.pub
-</code></pre>
-
-<p>Look at Principals in the output:</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">signmykey -u johndoe
+</code></pre></div><h3 id="verify-your-key-principals">Verify your key principals</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ssh-keygen -Lf ~/.ssh/id_rsa-cert.pub
+</code></pre></div><p>Look at Principals in the output:</p>
 <pre><code>/home/myuser/.ssh/id_rsa-cert.pub:
         Type: ssh-rsa-cert-v01@openssh.com user certificate
         Public key: RSA-CERT ce:75:5e:4d:3a:db:29:f4:69:3f:98:39:80:48:a3:0f
@@ -540,10 +487,9 @@ systemctl status signmykey.service
                 permit-pty
 </code></pre>
 
-
 			<aside class="copyright" role="note">
 				
-				&copy; 2019 Released under the MIT license &ndash;
+				&copy; 2021 Released under the MIT license &ndash;
 				
 				Documentation built with
 				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
@@ -557,7 +503,7 @@ systemctl status signmykey.service
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://signmykey.io/backends/signer/" title="Signer">
+      <a href="https://signmykey.io/getting-started/sshserver/" title="SSH Server">
         <span class="direction">
           Previous
         </span>
@@ -567,7 +513,7 @@ systemctl status signmykey.service
           </div>
           <div class="stretch">
             <div class="title">
-              Signer
+              SSH Server
             </div>
           </div>
         </div>
@@ -577,14 +523,14 @@ systemctl status signmykey.service
 
   <div class="next">
   
-      <a href="https://signmykey.io/getting-started/vault/" title="Vault">
+      <a href="https://signmykey.io/backends/signer/" title="Signer">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Vault
+              Signer
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

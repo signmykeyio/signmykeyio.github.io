@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
     <title>Principals - Signmykey</title>
-    <meta name="generator" content="Hugo 0.46" />
+    <meta name="generator" content="Hugo 0.69.0" />
 
     
     <meta name="description" content="Signmykey is an automated SSH Certificate Authority">
@@ -366,29 +366,19 @@
 		<div class="wrapper">
 			<h1>Principals </h1>
 
-			
-
-<h2 id="local">Local</h2>
-
+			<h2 id="local">Local</h2>
 <h3 id="example-usage">Example Usage</h3>
-
 <pre><code>principalsType: local
 principalsOpts:
   users:
     foouser: fooprincpal,anotherprincipal,thirdprincipal
     baruser: anotherprincipal
-</code></pre>
-
-<h3 id="options">Options</h3>
-
+</code></pre><h3 id="options">Options</h3>
 <ul>
 <li><strong>users</strong> - Map of users and associated principals (required)</li>
 </ul>
-
 <h2 id="ldap">LDAP</h2>
-
 <h3 id="example-usage-1">Example Usage</h3>
-
 <pre><code>principalsType: ldap
 principalsOpts:
   ldapAddr: localhost
@@ -401,10 +391,7 @@ principalsOpts:
   ldapUserSearch: &quot;(cn=%s)&quot;
   ldapGroupBase: &quot;dc=glauth,dc=com&quot;
   ldapGroupSearch: &quot;(&amp;(objectClass=group)((member=%s)))&quot;
-</code></pre>
-
-<h3 id="options-1">Options</h3>
-
+</code></pre><h3 id="options-1">Options</h3>
 <ul>
 <li><strong>ldapAddr</strong> - Address of LDAP server (required)</li>
 <li><strong>ldapPort</strong> - Port of LDAP server</li>
@@ -419,30 +406,52 @@ principalsOpts:
 <li><strong>ldapGroupPrefix</strong> - Filter LDAP groups by prefix</li>
 <li><strong>transformCase</strong> - Change case of returned principals (default: none) (must be &ldquo;none&rdquo;, &ldquo;lower&rdquo; or &ldquo;upper&rdquo;)</li>
 </ul>
-
 <h2 id="oidc-ropc">OIDC ROPC</h2>
-
 <h3 id="example-usage-2">Example Usage</h3>
-
 <pre><code>principalsType: oidcropc
 principalsOpts:
   oidcUserinfoEndpoint: &quot;https://idp.my.corp/auth/realms/mycorp/protocol/openid-connect/userinfo&quot;
   oidcUserGroupsEntry: &quot;oidc-groups&quot;
   transformCase: upper
-</code></pre>
-
-<h3 id="options-2">Options</h3>
-
+</code></pre><h3 id="options-2">Options</h3>
 <ul>
 <li><strong>oidcUserinfoEndpoint</strong> - OpenID Connect userinfo Endpoint (required)</li>
 <li><strong>oidcUserGroupsEntry</strong> - OpenID Connect group entry name returned by userinfo endpoint (required)</li>
 <li><strong>transformCase</strong> - Change case of returned principals (default: none) (must be &ldquo;none&rdquo;, &ldquo;lower&rdquo; or &ldquo;upper&rdquo;)</li>
 </ul>
-
+<h2 id="user">User</h2>
+<p>Just adds username that you used to login to the principals list. Currently there are no options for
+this provider.</p>
+<h3 id="example-usage-3">Example Usage</h3>
+<pre><code>principalsType: user
+</code></pre><h2 id="multiple-principals-providers">Multiple principals providers</h2>
+<p>It is possible to configure multiple principals providers at the same time. For example, you can &ldquo;chain&rdquo;
+user, ldap and local providers: the resulted principals list will be your user name, ldap groups and
+local principals.</p>
+<p>If &ldquo;principalsProviders&rdquo; and &ldquo;principalsType&rdquo; are both configured, first one will be used.</p>
+<h3 id="example-usage-4">Example usage</h3>
+<pre><code>principalsProviders:
+  user:  # has no options yet
+  ldap:
+    ldapAddr: localhost
+    ldapPort: 3893
+    ldapTLS: False
+    ldapTLSVerify: False
+    ldapBindUser: &quot;cn=serviceuser,ou=svcaccts,dc=glauth,dc=com&quot;
+    ldapBindPassword: &quot;mysecret&quot;
+    ldapUserBase: &quot;dc=glauth,dc=com&quot;
+    ldapUserSearch: &quot;(cn=%s)&quot;
+    ldapGroupBase: &quot;dc=glauth,dc=com&quot;
+    ldapGroupSearch: &quot;(&amp;(objectClass=group)((member=%s)))&quot;
+  local:
+    users:
+      foouser: fooprincpal,anotherprincipal,thirdprincipal
+      baruser: anotherprincipal
+</code></pre>
 
 			<aside class="copyright" role="note">
 				
-				&copy; 2019 Released under the MIT license &ndash;
+				&copy; 2021 Released under the MIT license &ndash;
 				
 				Documentation built with
 				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
@@ -456,7 +465,7 @@ principalsOpts:
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://signmykey.io/howtos/oidcropc/" title="OpenID Connect ROPC compliant server">
+      <a href="https://signmykey.io/backends/signer/" title="Signer">
         <span class="direction">
           Previous
         </span>
@@ -466,7 +475,7 @@ principalsOpts:
           </div>
           <div class="stretch">
             <div class="title">
-              OpenID Connect ROPC compliant server
+              Signer
             </div>
           </div>
         </div>
@@ -476,14 +485,14 @@ principalsOpts:
 
   <div class="next">
   
-      <a href="https://signmykey.io/getting-started/sshserver/" title="SSH Server">
+      <a href="https://signmykey.io/howtos/oidcropc/" title="OpenID Connect ROPC compliant server">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              SSH Server
+              OpenID Connect ROPC compliant server
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

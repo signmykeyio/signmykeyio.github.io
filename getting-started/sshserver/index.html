@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
     <title>SSH Server - Signmykey</title>
-    <meta name="generator" content="Hugo 0.46" />
+    <meta name="generator" content="Hugo 0.69.0" />
 
     
     <meta name="description" content="Signmykey is an automated SSH Certificate Authority">
@@ -366,16 +366,15 @@
 		<div class="wrapper">
 			<h1>SSH Server </h1>
 
-			
-
-<h2 id="configuration">Configuration</h2>
-
+			<h3 id="configuration">Configuration</h3>
 <p>In order to use SSH principals, you must configure your SSH servers to use them.</p>
-
 <p>You can find <a href="https://signmykey.io/getting-started/vault/#export-ca-public-key">here</a> how to generate the file <em>/etc/ssh/ca.pem</em>.</p>
-
-<p>Modify the file <em>/etc/ssh/sshd_config</em> with the following parameters</p>
-
+<h2 id="linux-server">Linux server</h2>
+<p><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Open SSH Server must be installed on the server.</p>
+</div>
+Modify the file <em>/etc/ssh/sshd_config</em> with the following parameters</p>
 <pre><code>...
 # Allow root to connect
 PermitRootLogin yes
@@ -392,37 +391,66 @@ AuthorizedKeysFile /dev/null
 # Deny password authentication
 PasswordAuthentication no
 ...
-</code></pre>
-
-<h2 id="principals">Principals</h2>
-
+</code></pre><h1 id="principals">Principals</h1>
 <p>Create the <em>/etc/ssh/authorized_principals</em> directory</p>
-
-<pre><code class="language-sh">mkdir /etc/ssh/authorized_principals/
-</code></pre>
-
-<p>Also create the file <em>/etc/ssh/authorized_principals/root</em> for the <strong>root</strong> user</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mkdir /etc/ssh/authorized_principals/
+</code></pre></div><p>Also create the file <em>/etc/ssh/authorized_principals/root</em> for the <strong>root</strong> user</p>
 <pre><code>hackers
 superheros
-</code></pre>
-
-<p>It means that users with <strong>hackers</strong> and <strong>superheros</strong> principals can login as <strong>root</strong> to the server with ssh.</p>
-
-<h2 id="restart">Restart</h2>
-
+</code></pre><p>It means that users with <strong>hackers</strong> and <strong>superheros</strong> principals can login as <strong>root</strong> to the server with ssh.</p>
+<h1 id="restart">Restart</h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Be sure to be able to connect via a console to your server.</p>
 </div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">systemctl restart sshd.service
+</code></pre></div><h2 id="windows">Windows</h2>
+<p><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Open SSH Server must be installed on the server. On Windows 2019 Server the service is present by default, just enable it.</p>
+</div>
+Modify the file <em>C:\ProgramData\ssh\sshd_config</em> with the following parameters</p>
+<pre><code>...
+# Allow log into **
+SyslogFacility LOCAL0
 
-<pre><code class="language-sh">systemctl restart sshd.service
+# Copy Vault SSH CA
+TrustedUserCAKeys __PROGRAMDATA__/ssh/trusted-vault-ca-keys.pub
+
+# Permit user principals
+AuthorizedPrincipalsFile __PROGRAMDATA__/ssh/authorized_principals
+
+# Deny non signed key files
+AuthorizedKeysFile  none
+
+# Deny password authentication
+PasswordAuthentication no
+
+# Nor mandatory but usefull when user has Administrators' right
+Match Group administrators
+#       AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys
+       AuthorizedPrincipalsFile __PROGRAMDATA__/ssh/authorized_principals
+...
+</code></pre><h1 id="principals-1">Principals</h1>
+<p>Create the <em>C:\ProgramData\ssh\authorized_princpals</em> file
+Be sure to only grant RO on this file for SYSTEM user.</p>
+<p>In this file indicate all the principals that are owned by users you want to be able to connect to the server.</p>
+<pre><code>hackers, superheros
+</code></pre><p>It means that users with <strong>hackers</strong> and <strong>superheros</strong> principals can login to the server with ssh.</p>
+<h1 id="restart-1">Restart</h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be sure to be able to connect via a console/rdp to your server.</p>
+</div>
+<p>Reload the service in the in the <em>Services</em> application
+or
+In cmd.exe</p>
+<pre><code>net stop gsw_sshd &amp;&amp; net start gsw_sshd
 </code></pre>
-
 
 			<aside class="copyright" role="note">
 				
-				&copy; 2019 Released under the MIT license &ndash;
+				&copy; 2021 Released under the MIT license &ndash;
 				
 				Documentation built with
 				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
@@ -436,7 +464,7 @@ superheros
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://signmykey.io/backends/principals/" title="Principals">
+      <a href="https://signmykey.io/getting-started/vault/" title="Vault">
         <span class="direction">
           Previous
         </span>
@@ -446,7 +474,7 @@ superheros
           </div>
           <div class="stretch">
             <div class="title">
-              Principals
+              Vault
             </div>
           </div>
         </div>
@@ -456,14 +484,14 @@ superheros
 
   <div class="next">
   
-      <a href="https://signmykey.io/backends/signer/" title="Signer">
+      <a href="https://signmykey.io/getting-started/signmykey/" title="Signmykey">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Signer
+              Signmykey
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

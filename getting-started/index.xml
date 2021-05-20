@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Getting-starteds on Signmykey</title>
@@ -11,6 +11,19 @@
     
     
     <item>
+      <title>Signmykey</title>
+      <link>https://signmykey.io/getting-started/signmykey/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://signmykey.io/getting-started/signmykey/</guid>
+      <description>Installation On Ubuntu 16.04+, add signmykey repository and key:
+echo &amp;quot;deb https://apt.signmykey.io/ stable main&amp;quot; &amp;gt; /etc/apt/sources.list.d/signmykey.list curl https://gpg.signmykey.io/signmykey.pub | apt-key add - Then
+useradd --no-create-home -s /bin/false signmykey apt update &amp;amp;&amp;amp; apt install signmykey wget https://raw.githubusercontent.com/signmykeyio/signmykey/master/signmykey.service -O /etc/systemd/system/signmykey.service systemctl enable signmykey.service mkdir -m 700 /etc/signmykey Server certificate Generate a certificate for signmykey server using Vault PKI
+Note: you can use another certificate provider
+vault write pki/issue/allow-all-domains common_name=&amp;#34;signmykeyserver&amp;#34; alt_names=&amp;#34;localhost&amp;#34; ip_sans=&amp;#34;127.0.0.1&amp;#34; Copy the output from the previous command</description>
+    </item>
+    
+    <item>
       <title>SSH Server</title>
       <link>https://signmykey.io/getting-started/sshserver/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -18,21 +31,10 @@
       <guid>https://signmykey.io/getting-started/sshserver/</guid>
       <description>Configuration In order to use SSH principals, you must configure your SSH servers to use them.
 You can find here how to generate the file /etc/ssh/ca.pem.
-Modify the file /etc/ssh/sshd_config with the following parameters
+Linux server Warning
+Open SSH Server must be installed on the server.
+ Modify the file /etc/ssh/sshd_config with the following parameters
 ... # Allow root to connect PermitRootLogin yes # Copy Vault SSH CA TrustedUserCAKeys /etc/ssh/ca.pem # Permit user principals AuthorizedPrincipalsFile /etc/ssh/authorized_principals/%u # Deny non signed key files AuthorizedKeysFile /dev/null # Deny password authentication PasswordAuthentication no .</description>
-    </item>
-    
-    <item>
-      <title>Signmykey</title>
-      <link>https://signmykey.io/getting-started/signmykey/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://signmykey.io/getting-started/signmykey/</guid>
-      <description>Installation On Ubuntu 16.04+, add signmykey repository and key:
-echo &amp;quot;deb https://apt.signmykey.io/ stable main&amp;quot; &amp;gt; /etc/apt/sources.list.d/signmykey.list curl https://gpg.signmykey.io/signmykey.pub | apt-key add -  Then
-useradd --no-create-home -s /bin/false signmykey apt update &amp;amp;&amp;amp; apt install signmykey wget https://raw.githubusercontent.com/signmykeyio/signmykey/master/signmykey.service -O /etc/systemd/system/signmykey.service systemctl enable signmykey.service  mkdir -m 700 /etc/signmykey  Server certificate Generate a certificate for signmykey server using Vault PKI
-Note: you can use another certificate provider
-vault write pki/issue/allow-all-domains common_name=&amp;quot;signmykeyserver&amp;quot; alt_names=&amp;quot;localhost&amp;quot; ip_sans=&amp;quot;127.</description>
     </item>
     
     <item>
@@ -43,8 +45,8 @@ vault write pki/issue/allow-all-domains common_name=&amp;quot;signmykeyserver&am
       <guid>https://signmykey.io/getting-started/vault/</guid>
       <description>Before you can use Signmykey, you must configure your Vault server to allow its usage.
 Enable ssh First, enable the ssh secret engine to sign keys.
-vault secrets enable ssh  Enable CA Generate CA for ssh.
-vault write -f ssh/config/ca Key Value --- ----- public_key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCwjLDgrISTB9no8Y4KE+1A7nvue1hfodlhC88jeXLbmop+mbvsG237FAs1TACHRxmyMfeM1b7N6FmLgisnf0Btk8tGPvikNcbHMf4kq7FwV2WeoSgHvtXex/dalrAnLbumthJUtYxY8dFticpxBp4guicretGbQ5LjVpOAPW8PhifrmoUgGUJ44eWET1Yg6sEiV4ZXv3nlXb7YFTJSaP3StJ4rCTFwCZA2NBV2ecBGee28+MtRx+bERecMic4GeXHXRhtHhf0gf8PaO7ePQ5pXPC1dxLG/GHAhwl04JUfc49NsWPavVuY5jUNFqfMZ4r0rN/TLl3XDyLkPPOGINkyoUoAW1Ji6DScnahYFA4i6oxQ0g3He5DWd71i6jm/3jodZ2lJjZyO8m89ceGr+f3Gwl8KVP2FQ+//psMADEcROJbK0v8YpSzJxM4tO7nsQ+FDKCbXGHAfdqwPS3TdI2AtU40FDEyf+cb41FtDCALBNdf4OoPg3gp9K2TVYvLG0iiz/1Poupqcnip04icvxFaTIAd8yzQa+9d3qzv7g6WxDpvcE04Z5VI/Lzw2wNXXOM/TdAm9YJco1vMrlJQAb8evstpSSSriMlQfeJUKFOKldgLF0cMLhgQFi5vF2R6t517N6rzy3Nxm4vKB/BomX8+iO9jXwscFSCDJt1HduXAtaQQ==  Export CA public key vault read -field=public_key ssh/config/ca &amp;gt; /etc/ssh/ca.pem  This certificate will be used on ssh servers, so keep it to copy its content later.</description>
+vault secrets enable ssh Enable CA Generate CA for ssh.
+vault write -f ssh/config/ca Key Value --- ----- public_key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCwjLDgrISTB9no8Y4KE+1A7nvue1hfodlhC88jeXLbmop+mbvsG237FAs1TACHRxmyMfeM1b7N6FmLgisnf0Btk8tGPvikNcbHMf4kq7FwV2WeoSgHvtXex/dalrAnLbumthJUtYxY8dFticpxBp4guicretGbQ5LjVpOAPW8PhifrmoUgGUJ44eWET1Yg6sEiV4ZXv3nlXb7YFTJSaP3StJ4rCTFwCZA2NBV2ecBGee28+MtRx+bERecMic4GeXHXRhtHhf0gf8PaO7ePQ5pXPC1dxLG/GHAhwl04JUfc49NsWPavVuY5jUNFqfMZ4r0rN/TLl3XDyLkPPOGINkyoUoAW1Ji6DScnahYFA4i6oxQ0g3He5DWd71i6jm/3jodZ2lJjZyO8m89ceGr+f3Gwl8KVP2FQ+//psMADEcROJbK0v8YpSzJxM4tO7nsQ+FDKCbXGHAfdqwPS3TdI2AtU40FDEyf+cb41FtDCALBNdf4OoPg3gp9K2TVYvLG0iiz/1Poupqcnip04icvxFaTIAd8yzQa+9d3qzv7g6WxDpvcE04Z5VI/Lzw2wNXXOM/TdAm9YJco1vMrlJQAb8evstpSSSriMlQfeJUKFOKldgLF0cMLhgQFi5vF2R6t517N6rzy3Nxm4vKB/BomX8+iO9jXwscFSCDJt1HduXAtaQQ== Export CA public key vault read -field=public_key ssh/config/ca &amp;gt; /etc/ssh/ca.pem This certificate will be used on ssh servers, so keep it to copy its content later.</description>
     </item>
     
   </channel>

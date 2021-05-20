@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
     <title>Authenticator - Signmykey</title>
-    <meta name="generator" content="Hugo 0.46" />
+    <meta name="generator" content="Hugo 0.69.0" />
 
     
     <meta name="description" content="Signmykey is an automated SSH Certificate Authority">
@@ -366,29 +366,19 @@
 		<div class="wrapper">
 			<h1>Authenticator </h1>
 
-			
-
-<h2 id="local">Local</h2>
-
+			<h2 id="local">Local</h2>
 <h3 id="example-usage">Example Usage</h3>
-
 <pre><code>authenticatorType: local
 authenticatorOpts:
   users:
     foouser: $2a$10$zsvMZ7nEYo4jJJxgb5FpH.izPH37LsuLBXPbuKH4MPF4sihFSG6bW
     baruser: $2a$10$srGqC9g46xaRXbueLk5kDuSuDM6h2EpC.MTRiVaij6s/jcsKQ6LHu
-</code></pre>
-
-<h3 id="options">Options</h3>
-
+</code></pre><h3 id="options">Options</h3>
 <ul>
 <li><strong>users</strong> - Map of users and bcrypt hashed passwords (you can hash passwords via &ldquo;signmykey hash&rdquo; command) (required)</li>
 </ul>
-
 <h2 id="ldap">LDAP</h2>
-
 <h3 id="example-usage-1">Example Usage</h3>
-
 <pre><code>authenticatorType: ldap
 authenticatorOpts:
   ldapAddr: localhost
@@ -399,10 +389,7 @@ authenticatorOpts:
   ldapBindPassword: &quot;mysecret&quot; 
   ldapBase: &quot;dc=glauth,dc=com&quot;
   ldapSearch: &quot;(cn=%s)&quot;
-</code></pre>
-
-<h3 id="options-1">Options</h3>
-
+</code></pre><h3 id="options-1">Options</h3>
 <ul>
 <li><strong>ldapAddr</strong> - Address of LDAP server (required)</li>
 <li><strong>ldapPort</strong> - Port of LDAP server</li>
@@ -413,20 +400,14 @@ authenticatorOpts:
 <li><strong>ldapBase</strong> - LDAP search base</li>
 <li><strong>ldapSearch</strong> - LDAP search string to find user</li>
 </ul>
-
 <h2 id="oidc-ropc">OIDC ROPC</h2>
-
 <h3 id="example-usage-2">Example Usage</h3>
-
 <pre><code>authenticatorType: oidcropc
 authenticatorOpts:
   oidcTokenEndpoint: &quot;https://idp.my.corp/auth/realms/mycorp/protocol/openid-connect/token&quot;
   oidcClientID: &quot;signmykey&quot;
   oidcClientSecret: &quot;93fac2d9-bd8f-453a-9ece-e2c430f0ee04&quot;
-</code></pre>
-
-<h3 id="options-2">Options</h3>
-
+</code></pre><h3 id="options-2">Options</h3>
 <ul>
 <li><strong>oidcTokenEndpoint</strong> - OpenID Connect token Endpoint (required)</li>
 <li><strong>oidcClientID</strong> - OpenID Connect Client ID (required)</li>
@@ -436,7 +417,7 @@ authenticatorOpts:
 
 			<aside class="copyright" role="note">
 				
-				&copy; 2019 Released under the MIT license &ndash;
+				&copy; 2021 Released under the MIT license &ndash;
 				
 				Documentation built with
 				<a href="https://www.gohugo.io" target="_blank">Hugo</a>
@@ -450,25 +431,25 @@ authenticatorOpts:
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-  </div>
-
-  <div class="next">
-  
       <a href="https://signmykey.io/howtos/ldapserver/" title="LDAP Server">
         <span class="direction">
-          Next
+          Previous
         </span>
         <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
           <div class="stretch">
             <div class="title">
               LDAP Server
             </div>
           </div>
-          <div class="button button-next" role="button" aria-label="Next">
-            <i class="icon icon-forward"></i>
-          </div>
         </div>
       </a>
+  
+  </div>
+
+  <div class="next">
   
   </div>
 </nav>
